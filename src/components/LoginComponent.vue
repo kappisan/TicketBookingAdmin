@@ -25,7 +25,7 @@ export default {
     password: ''
   }),
   mounted() {
-    console.log("mounted orb scape component")
+    console.log("mounted login component")
 
   },
   methods: {
@@ -34,6 +34,7 @@ export default {
 
       // hardcoded login screen
       if (this.username == 'menacing' && this.password == 'media') {
+      	this.$store.commit('saveUser', this.username);
         console.log("password is correct");
         window.location.href = 'dashboard';
       }

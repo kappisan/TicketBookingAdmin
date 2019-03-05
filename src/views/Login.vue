@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <OrbScape msg="Welcome to Your Vue.js App"/>
+    <OrbScape />
     <LoginComponent />
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
     LoginComponent
   },
   mounted() {
-    console.log("i have mounted");
+    console.log("login page has mounted");
   }
 }
 </script>

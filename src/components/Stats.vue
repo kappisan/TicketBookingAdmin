@@ -1,8 +1,7 @@
 <template>
 
   <div class="login">
-    <h1>events</h1>
-    <p v-for="(event, index) in getEvents">{{ index }}  {{ event }}</p>
+    <h1>Stats</h1>
   </div>
 
 </template>
@@ -12,7 +11,7 @@
   import {mapGetters} from 'vuex'
 
   export default {
-    name: 'Events',
+    name: 'Stats',
     props: {
       msg: String
     },
@@ -21,7 +20,7 @@
       password: ''
     }),
     mounted() {
-      console.log("mounted events component")
+      console.log("mounted stats component")
     },
     computed : {
     ...mapGetters(['getUsername', 'getEvents']),

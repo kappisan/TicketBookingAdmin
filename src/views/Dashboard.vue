@@ -1,65 +1,79 @@
 <template>
 <div class="dashboard">
-  <nav class="main-menu">
-        <div class="username-container">
-          {{ getUsername }}
-        </div>
+    <nav class="main-menu">
+      <div class="username-container">
         <ul>
-            <li>
-                <a href="#">
-                    <i class="fa fa-home fa-2x"></i>
-                    <span class="nav-text">
-                        Dashboard
-                    </span>
-                </a>
-            </li>
-            <li class="has-subnav">
-                <a href="#events">
-                  <i class="fa fa-list fa-2x"></i>
-                    <span class="nav-text">
-                        Events
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a href="#stats">
-                    <i class="fa fa-bar-chart-o fa-2x"></i>
-                    <span class="nav-text">
-                        Graphs and Statistics
-                    </span>
-                </a>
-            </li>
-            <li>
-              <a href="#maps">
-                    <i class="fa fa-map-marker fa-2x"></i>
-                    <span class="nav-text">
-                        Maps
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a href="#documentation">
-                  <i class="fa fa-info fa-2x"></i>
-                    <span class="nav-text">
-                        Documentation
-                    </span>
-                </a>
-            </li>
+          <li>
+            <p>
+              <i class="fa fa-user fa-2x"></i>
+              <span class="nav-text">
+                {{ getUsername }}
+              </span>
+            </p>
+          </li>
         </ul>
+      </div>
+      <ul>
+        <li>
+          <a href="#">
+            <i class="fa fa-home fa-2x"></i>
+            <span class="nav-text">
+              Dashboard
+            </span>
+          </a>
+        </li>
+        <li class="has-subnav">
+          <a href="#events">
+            <i class="fa fa-list fa-2x"></i>
+              <span class="nav-text">
+                Events
+              </span>
+          </a>
+        </li>
+        <li>
+          <a href="#stats">
+            <i class="fa fa-bar-chart-o fa-2x"></i>
+            <span class="nav-text">
+              Graphs and Statistics
+            </span>
+          </a>
+        </li>
+        <!--
+        <li>
+          <a href="#maps">
+            <i class="fa fa-map-marker fa-2x"></i>
+            <span class="nav-text">
+              Maps
+            </span>
+          </a>
+        </li>
+        -->
+        <li>
+          <a href="#documentation">
+            <i class="fa fa-info fa-2x"></i>
+            <span class="nav-text">
+              Documentation
+            </span>
+          </a>
+        </li>
+      </ul>
 
-        <ul class="logout">
-            <li>
-              <router-link to="/">
-                <i class="fa fa-power-off fa-2x"></i>
-                <span class="nav-text">
-                    Logout
-                </span>
-              </router-link>
-            </li>  
-        </ul>
+      <ul class="logout">
+        <li>
+          <router-link to="/">
+            <i class="fa fa-power-off fa-2x"></i>
+            <span class="nav-text">
+              Logout
+            </span>
+          </router-link>
+        </li>  
+      </ul>
     </nav>
     <div class="dashboard-content">
-      <Events />
+      <Events v-if="tab == '#'" />
+      <Events v-if="tab == '#events'" />
+      <Stats v-if="tab == '#stats'" />
+      <Documentation v-if="tab == '#documentation'" />
     </div>
   </div>
 </template>
@@ -94,7 +108,8 @@
   }
 
 
-  .main-menu:hover,nav.main-menu.expanded {
+  .main-menu:hover,
+  nav.main-menu.expanded {
   width:250px;
   overflow:visible;
   }
@@ -125,7 +140,8 @@
   width:250px;
   }
 
-  .main-menu li>a {
+  .main-menu li>a,
+  .main-menu li>p {
   position:relative;
   display:table;
   border-collapse:collapse;
@@ -190,9 +206,11 @@
   margin:0;
   padding:0;
   }
-  .main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
-  color:#fff;
-  background-color:#5fa2db;
+  .main-menu {
+    li:hover>a {
+      color:#fff;
+      background-color:#5fa2db;
+    }
   }
   .area {
   float: left;
@@ -211,18 +229,25 @@
 
 <script>
 
-  import {mapGetters} from 'vuex'
+  import { mapGetters } from 'vuex'
 
   // @ is an alias to /src
   import OrbScape from '@/components/OrbScape.vue'
+  import Stats from '@/components/Stats.vue'
   import LoginComponent from '@/components/LoginComponent.vue'
   import Events from '@/components/Events.vue'
+  import Documentation from '@/components/Documentation.vue'
 
   export default {
     name: 'home',
+    data: () => ({
+      tab: '#'
+    }),
     components: {
       OrbScape,
       LoginComponent,
+      Documentation,
+      Stats,
       Events
     },
     computed : {
@@ -231,6 +256,12 @@
     },
     mounted() {
       console.log("i have mounted");
-    }
+    },
+    watch:{
+      $route (to, from){
+        this.tab = to.hash ? to.hash : '#';
+        console.log("route change", this.tab);
+      }
+    } 
   }
 </script>
