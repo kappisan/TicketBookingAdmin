@@ -1,17 +1,12 @@
 <template>
 <div class="dashboard">
-  <!--
-    <div class="nav">
-    {{ getUsername }}
-  </div>
-  -->
   <nav class="main-menu">
         <div class="username-container">
           {{ getUsername }}
         </div>
         <ul>
             <li>
-                <a href="http://justinfarrow.com">
+                <a href="#">
                     <i class="fa fa-home fa-2x"></i>
                     <span class="nav-text">
                         Dashboard
@@ -19,34 +14,15 @@
                 </a>
             </li>
             <li class="has-subnav">
-                <a href="#">
-                    <i class="fa fa-laptop fa-2x"></i>
-                    <span class="nav-text">
-                        Stars Components
-                    </span>
-                </a>
-                
-            </li>
-            <li class="has-subnav">
-                <a href="#">
+                <a href="#events">
                   <i class="fa fa-list fa-2x"></i>
                     <span class="nav-text">
-                        Forms
+                        Events
                     </span>
                 </a>
-                
-            </li>
-            <li class="has-subnav">
-                <a href="#">
-                  <i class="fa fa-folder-open fa-2x"></i>
-                    <span class="nav-text">
-                        Pages
-                    </span>
-                </a>
-              
             </li>
             <li>
-                <a href="#">
+                <a href="#stats">
                     <i class="fa fa-bar-chart-o fa-2x"></i>
                     <span class="nav-text">
                         Graphs and Statistics
@@ -54,23 +30,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class="fa fa-font fa-2x"></i>
-                    <span class="nav-text">
-                      Quotes
-                    </span>
-                </a>
-            </li>
-            <li>
-              <a href="#">
-                  <i class="fa fa-table fa-2x"></i>
-                    <span class="nav-text">
-                        Tables
-                    </span>
-                </a>
-            </li>
-            <li>
-              <a href="#">
+              <a href="#maps">
                     <i class="fa fa-map-marker fa-2x"></i>
                     <span class="nav-text">
                         Maps
@@ -78,7 +38,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="#documentation">
                   <i class="fa fa-info fa-2x"></i>
                     <span class="nav-text">
                         Documentation
@@ -89,34 +49,31 @@
 
         <ul class="logout">
             <li>
-              <a href="#">
-                    <i class="fa fa-power-off fa-2x"></i>
-                    <span class="nav-text">
-                        Logout
-                    </span>
-                </a>
+              <router-link to="/">
+                <i class="fa fa-power-off fa-2x"></i>
+                <span class="nav-text">
+                    Logout
+                </span>
+              </router-link>
             </li>  
         </ul>
     </nav>
     <div class="dashboard-content">
-      <p v-for="(event, index) in getEvents">{{ index }}  {{ event }}</p>
+      <Events />
     </div>
   </div>
 </template>
 
 <style lang="scss">
   .dashboard {
+    color: #999;
     .username-container {
       color: #fff;
       padding: 20px 4px;
+      height: 100px;
     }
-    .nav {
-      left: 0;
-      right: 0;
-      position: absolute;
-      border-style: solid;
-      border-width: 0 0 1px 0;
-      border-color: #fff;
+    .dashboard-content {
+      padding: 0 40px 20px 100px;
     }
   }
 
@@ -259,12 +216,14 @@
   // @ is an alias to /src
   import OrbScape from '@/components/OrbScape.vue'
   import LoginComponent from '@/components/LoginComponent.vue'
+  import Events from '@/components/Events.vue'
 
   export default {
     name: 'home',
     components: {
       OrbScape,
-      LoginComponent
+      LoginComponent,
+      Events
     },
     computed : {
     ...mapGetters(['getUsername', 'getEvents']),

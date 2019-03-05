@@ -1,10 +1,15 @@
 <template>
   <div class="home">
-    <!--<img alt="Vue logo" src="../assets/logo.png">-->
     <OrbScape msg="Welcome to Your Vue.js App"/>
     <LoginComponent />
   </div>
 </template>
+
+<style>
+  .mm-logo {
+    width: 100px;
+  }
+</style>
 
 <script>
 // @ is an alias to /src

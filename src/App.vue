@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/dashboard">Dashboard</router-link>
-    </div>
     <div class="content">
       <router-view/>
     </div>
@@ -27,21 +23,6 @@ body {
     bottom: 0;
     top: 0;
     overflow-x: hidden;
-  }
-}
-#nav {
-  padding: 30px;
-  position: fixed;
-  left: 0;
-  right: 0;
-  z-index: 9;
-  display: none;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
   }
 }
 </style>
