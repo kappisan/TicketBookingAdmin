@@ -88,9 +88,17 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
-    saveUser(state, username) {
-      console.log("saveUser mutation", username);
-      state.username = username;
+    saveUser (state, username) {
+      console.log('saveUser mutation', username)
+      state.username = username
+    },
+    logout (state) {
+      console.log('logout mutation')
+      state.username = ''
+      window.location.href = '/'
+    },
+    createEvent (state, event) {
+      console.log('create event mutation', event)
     }
   },
   action: {
@@ -98,6 +106,6 @@ export default new Vuex.Store({
   },
   getters: {
     getUsername: state => state.username,
-    getEvents: state => state.events
+    getEvents: state => state.username ? state.events : []
   }
 })

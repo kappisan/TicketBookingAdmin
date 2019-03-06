@@ -38,16 +38,15 @@
             </span>
           </a>
         </li>
-        <!--
         <li>
-          <a href="#maps">
-            <i class="fa fa-map-marker fa-2x"></i>
+          <a href="#newevent">
+            <i class="fa fa-calendar fa-2x"></i>
             <span class="nav-text">
-              Maps
+              New Event
             </span>
           </a>
         </li>
-        -->
+        
         <li>
           <a href="#documentation">
             <i class="fa fa-info fa-2x"></i>
@@ -60,12 +59,12 @@
 
       <ul class="logout">
         <li>
-          <router-link to="/">
+          <a v-on:click="logout">
             <i class="fa fa-power-off fa-2x"></i>
             <span class="nav-text">
               Logout
             </span>
-          </router-link>
+          </a>
         </li>  
       </ul>
     </nav>
@@ -73,12 +72,14 @@
       <Events v-if="tab == '#'" />
       <Events v-if="tab == '#events'" />
       <Stats v-if="tab == '#stats'" />
+      <NewEvent v-if="tab == '#newevent'" />
       <Documentation v-if="tab == '#documentation'" />
     </div>
   </div>
 </template>
 
 <style lang="scss">
+  /* https://codepen.io/JFarrow/pen/fFrpg */
   .dashboard {
     color: #999;
     .username-container {
@@ -230,6 +231,7 @@
 <script>
 
   import { mapGetters } from 'vuex'
+  import { mapMutations } from 'vuex'
 
   // @ is an alias to /src
   import OrbScape from '@/components/OrbScape.vue'
@@ -237,6 +239,7 @@
   import LoginComponent from '@/components/LoginComponent.vue'
   import Events from '@/components/Events.vue'
   import Documentation from '@/components/Documentation.vue'
+  import NewEvent from '@/components/NewEvent.vue'
 
   export default {
     name: 'home',
@@ -247,15 +250,29 @@
       OrbScape,
       LoginComponent,
       Documentation,
+      NewEvent,
       Stats,
       Events
     },
-    computed : {
+    methods: {
+      ...mapMutations([
+          'logout'
+      ])
+    },
+    computed: {
     ...mapGetters(['getUsername', 'getEvents']),
       //Other computed properties
     },
     mounted() {
-      console.log("i have mounted");
+      console.log("dashboard mounted", this.getUsername);
+      if (!this.getUsername) {
+        console.log("no username");
+      	// this.$store.commit('saveUser', this.username);
+        window.location.href = '/';
+      } else {
+        console.log("load into this page", this.$route.hash);
+        if (this.$route.hash) this.tab = this.$route.hash;
+      }
     },
     watch:{
       $route (to, from){
