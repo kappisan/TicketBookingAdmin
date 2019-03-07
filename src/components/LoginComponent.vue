@@ -67,18 +67,6 @@ body {
 	margin: -150px 0 0 -150px;
 	width:300px;
 	height:300px;
-	button {
-		background-color: #a00;
-		color: #fff;
-		border-width: 0;
-		width: 324px;
-		border-radius: 4px;
-		height: 37px;
-		&:hover {
-			cursor: pointer;
-			background-color: #e7001d;
-		}
-	}
 }
 .login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
 

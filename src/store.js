@@ -98,7 +98,8 @@ export default new Vuex.Store({
       window.location.href = '/'
     },
     createEvent (state, event) {
-      console.log('create event mutation', event)
+      console.log('create event mutation', event),
+      state.events.push(event);
     }
   },
   action: {

@@ -561,7 +561,7 @@ export default {
           for ( let z = 0; z < depth; z+= distance ) {
 
             position.push( - width / 2 + x, -30, -depth / 2 + z )
-            color.push( 1 - ( x / width ) * 0.5, 0, 0.5 + x / width * 0.5, z / depth )
+            color.push( 1 - ( x / width ) * 1, 0.3, 0.5 + x / width * 0.5, z / depth )
 
           }
         }

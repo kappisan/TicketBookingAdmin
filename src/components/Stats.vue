@@ -2,6 +2,23 @@
 
   <div class="login">
     <h1>Stats</h1>
+    <hr>
+
+    <h2>Ticket sales</h2>
+    <table>
+      <tr>
+        <th>Event</th>
+        <th>Sold</th>
+        <th>Remaining</th>
+        <th>Total</th>
+      </tr>
+      <tr v-for="event of getEvents">
+        <td>{{ event.location }}, {{ event.city }}</td>
+        <td>{{ event.tickets.length }}</td>
+        <td>{{ event.tickets.length }}</td>
+        <td>{{ totalTickets(event.tickets) }}</td>
+      </tr>
+    </table>
   </div>
 
 </template>
@@ -9,6 +26,9 @@
 <script>
 
   import {mapGetters} from 'vuex'
+
+  import * as d3 from 'd3';
+  import * as moment from 'moment'
 
   export default {
     name: 'Stats',
@@ -20,21 +40,17 @@
       password: ''
     }),
     mounted() {
-      console.log("mounted stats component")
+      console.log("mounted stats component", this.getEvents);
+
     },
     computed : {
     ...mapGetters(['getUsername', 'getEvents']),
       //Other computed properties
     },
     methods: {
-      login() {
-        console.log("login function", this.username, this.password);
-
-        // hardcoded login screen
-        if (this.username == 'menacing' && this.password == 'media') {
-          console.log("password is correct");
-          window.location.href = 'dashboard';
-        }
+      totalTickets(tickets) {
+        console.log("reduce tickets", tickets);
+        return tickets.reduce((memo, t) => t ? t.available : 0, 0);
       }
     }
   }
@@ -42,5 +58,14 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+  table {
+    margin: auto;
+    td,
+    th {
+      text-align: right;
+      padding: 2px 10px;
+    }
+  }
 
 </style>

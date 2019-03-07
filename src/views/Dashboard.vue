@@ -4,7 +4,7 @@
       <div class="username-container">
         <ul>
           <li>
-            <p>
+            <p style="text-align: center;">
               <i class="fa fa-user fa-2x"></i>
               <span class="nav-text">
                 {{ getUsername }}
@@ -69,7 +69,7 @@
       </ul>
     </nav>
     <div class="dashboard-content">
-      <Events v-if="tab == '#'" />
+      <Summary v-if="tab == '#'" />
       <Events v-if="tab == '#events'" />
       <Stats v-if="tab == '#stats'" />
       <NewEvent v-if="tab == '#newevent'" />
@@ -81,7 +81,7 @@
 <style lang="scss">
   /* https://codepen.io/JFarrow/pen/fFrpg */
   .dashboard {
-    color: #999;
+    color: #dedede;
     .username-container {
       color: #fff;
       padding: 20px 4px;
@@ -90,6 +90,15 @@
     .dashboard-content {
       padding: 0 40px 20px 100px;
     }
+  }
+
+  hr {
+      border-color: #666;
+      margin: 10px 10px 40px 10px;
+  }
+
+  p {
+    text-align: justify;
   }
 
   @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
@@ -108,6 +117,9 @@
   font-size:20px;
   }
 
+  .logout:hover {
+    cursor: pointer;
+  }
 
   .main-menu:hover,
   nav.main-menu.expanded {
@@ -118,7 +130,7 @@
   .main-menu {
   background:#212121;
   border-right:1px solid #e5e5e5;
-  position:absolute;
+  position:fixed;
   top:0;
   bottom:0;
   height:100%;
@@ -240,6 +252,7 @@
   import Events from '@/components/Events.vue'
   import Documentation from '@/components/Documentation.vue'
   import NewEvent from '@/components/NewEvent.vue'
+  import Summary from '@/components/Summary.vue'
 
   export default {
     name: 'home',
@@ -251,6 +264,7 @@
       LoginComponent,
       Documentation,
       NewEvent,
+      Summary,
       Stats,
       Events
     },
