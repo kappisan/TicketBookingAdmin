@@ -1,10 +1,24 @@
 <template>
 
-  <div class="login">
+  <div class="summary">
     <h1>Dashboard</h1>
     <hr>
 
+    <h2>Events</h2>
+
     <p v-for="(event, index) in getEvents">{{ index }}  {{ event.location }}</p>
+
+    <hr>
+
+    <h2>BTC Wallet</h2>
+    <div>
+        <div class="btc-balance">
+          <p>BTC Address: &nbsp; &nbsp; {{ getBTCAddress }}</p><br>
+          <p>BTC in: <i class="fa fa-btc"></i> {{ getBTCIn }}</p>
+        </div>
+    </div>
+  </div>
+    
   </div>
 
 </template>
@@ -26,12 +40,17 @@
       console.log("mounted events component")
     },
     computed : {
-    ...mapGetters(['getUsername', 'getEvents']),
+    ...mapGetters([
+        'getBTCIn',
+        'getBTCAddress',
+        'getUsername',
+        'getEvents'
+      ]),
       //Other computed properties
     },
     methods: {
       login() {
-        console.log("login function", this.username, this.password);
+        console.log("summary function", this.username, this.password);
 
         // hardcoded login screen
         if (this.username == 'menacing' && this.password == 'media') {
@@ -45,5 +64,11 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+.summary {
+  p {
+    text-align: center;
+  }
+}
 
 </style>

@@ -4,6 +4,9 @@
     <h1>Events</h1>
     <hr>
     <div class="event" v-for="(event, index) in getEvents">
+      <div class="delete-container" v-on:click="deleteEvent(index)">
+        <i class="fa fa-trash-o"></i>
+      </div>
       <div class="thumbnail-container">
         <img class="thumbnail" :src="event.img">
       </div>
@@ -71,6 +74,9 @@
           console.log("password is correct");
           window.location.href = 'dashboard';
         }
+      },
+      deleteEvent(index) {
+        console.log('delete event by id', index);
       }
     }
   }
@@ -85,6 +91,16 @@
     border-width: 0 0 1px 0;
     border-style: solid;
     border-color: #333;
+    .delete-container {
+      postion: absolute;
+      float: right;
+      cursor: pointer;
+      text-align: right;
+      i {
+        font-size: 30px;
+        position: absolute;
+      }
+    }
     .thumbnail-container {
       background-color: #333;
       width: 300px;

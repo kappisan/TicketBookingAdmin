@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import axios from 'axios'
+
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
@@ -9,6 +11,8 @@ export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
     username: '',
+    satoshisIn: 0,
+    btcAddress: '3QaQ33KSoPVYmZtfTNe6mXt5R3jGgRTjXZ',
     events: [
       {
         eid: 'brixton',
@@ -98,8 +102,19 @@ export default new Vuex.Store({
       window.location.href = '/'
     },
     createEvent (state, event) {
-      console.log('create event mutation', event),
-      state.events.push(event);
+      console.log('create event mutation', event)
+      state.events.push(event)
+    },
+    getBTCIn (state) {
+      return 24832729
+    },
+    fetchWalletData (state) {
+      axios
+        .get('https://blockchain.info/q/getreceivedbyaddress/' + state.btcAddress + '?confirmations=6')
+        .then(response => {
+          state.satoshisIn = response.data
+          console.log('THIS IS BTC IN', this.satoshisIn)
+        })
     }
   },
   action: {
@@ -107,6 +122,9 @@ export default new Vuex.Store({
   },
   getters: {
     getUsername: state => state.username,
+    getSatoshisIn: state => state.satoshisIn,
+    getBTCIn: state => state.satoshisIn / 100000000,
+    getBTCAddress: state => state.btcAddress,
     getEvents: state => state.username ? state.events : []
   }
 })

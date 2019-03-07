@@ -19,6 +19,16 @@
         <td>{{ totalTickets(event.tickets) }}</td>
       </tr>
     </table>
+
+    <hr>
+
+    <h2>BTC Wallet</h2>
+    <div>
+        <div class="btc-balance">
+          <p>BTC Address: &nbsp; &nbsp; {{ getBTCAddress }}</p><br>
+          <p>BTC in: <i class="fa fa-btc"></i> {{ getBTCIn }}</p>
+        </div>
+    </div>
   </div>
 
 </template>
@@ -44,7 +54,12 @@
 
     },
     computed : {
-    ...mapGetters(['getUsername', 'getEvents']),
+    ...mapGetters([
+        'getUsername',
+        'getEvents',
+        'getBTCIn',
+        'getBTCAddress'
+      ]),
       //Other computed properties
     },
     methods: {

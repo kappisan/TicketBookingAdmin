@@ -92,6 +92,13 @@
     }
   }
 
+  .btc-balance {
+    p, i, span {
+      display: inline-block;
+    }
+  }
+
+
   hr {
       border-color: #666;
       margin: 10px 10px 40px 10px;
@@ -286,6 +293,8 @@
       } else {
         console.log("load into this page", this.$route.hash);
         if (this.$route.hash) this.tab = this.$route.hash;
+        
+        this.$store.commit('fetchWalletData');
       }
     },
     watch:{
