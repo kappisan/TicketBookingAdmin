@@ -115,6 +115,14 @@ export default new Vuex.Store({
           state.satoshisIn = response.data
           console.log('THIS IS BTC IN', this.satoshisIn)
         })
+    },
+    eventData (state) {
+      axios
+        .get('https://m25hqax3sj.execute-api.us-east-1.amazonaws.com/default/contact')
+        .then(response => {
+          // state.events = response.data
+          console.log('THIS EVENT DATA FROM API GATEWAY', response)
+        })
     }
   },
   action: {
