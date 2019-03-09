@@ -7,16 +7,14 @@
     <h2>Ticket sales</h2>
     <table>
       <tr>
-        <th>Event</th>
-        <th>Sold</th>
-        <th>Remaining</th>
-        <th>Total</th>
+        <th>Email</th>
+        <th>event</th>
+        <th>Price</th>
       </tr>
-      <tr v-for="event of getEvents">
-        <td>{{ event.location }}, {{ event.city }}</td>
-        <td>{{ event.tickets.length }}</td>
-        <td>{{ event.tickets.length }}</td>
-        <td>{{ totalTickets(event.tickets) }}</td>
+      <tr v-for="ticket of fetchSalesData">
+        <td>{{ ticket.email }}</td>
+        <td>{{ ticket.event }}</td>
+        <td>£{{ ticket.amount }}</td>
       </tr>
     </table>
 
@@ -37,7 +35,6 @@
 
   import {mapGetters} from 'vuex'
 
-  import * as d3 from 'd3';
   import * as moment from 'moment'
 
   export default {
@@ -58,7 +55,8 @@
         'getUsername',
         'getEvents',
         'getBTCIn',
-        'getBTCAddress'
+        'getBTCAddress',
+        'fetchSalesData'
       ]),
       //Other computed properties
     },
