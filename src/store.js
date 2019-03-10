@@ -70,6 +70,11 @@ export default new Vuex.Store({
         return state.events;
       }
     },
+    totalInSales: state => {
+      return state.sales.reduce((accumulator, sale) => {
+        return accumulator + parseFloat(sale.amount);
+      }, 0)
+    },
     fetchSalesData: state => {
       console.log("fetch sales data precheck", state.sales);
       if (!state.username) return [];

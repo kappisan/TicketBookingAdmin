@@ -31,10 +31,10 @@
           </a>
         </li>
         <li>
-          <a href="#stats">
-            <i class="fa fa-bar-chart-o fa-2x"></i>
+          <a href="#sales">
+            <i class="fa fa-money fa-2x"></i>
             <span class="nav-text">
-              Graphs and Statistics
+              Sales
             </span>
           </a>
         </li>
@@ -71,7 +71,7 @@
     <div class="dashboard-content">
       <Summary v-if="tab == '#'" />
       <Events v-if="tab == '#events'" />
-      <Stats v-if="tab == '#stats'" />
+      <Sales v-if="tab == '#sales'" />
       <NewEvent v-if="tab == '#newevent'" />
       <Documentation v-if="tab == '#documentation'" />
     </div>
@@ -79,6 +79,16 @@
 </template>
 
 <style lang="scss">
+
+  table {
+    margin: auto;
+    td,
+    th {
+      text-align: right;
+      padding: 2px 10px;
+    }
+  }
+
   /* https://codepen.io/JFarrow/pen/fFrpg */
   .dashboard {
     color: #dedede;
@@ -254,7 +264,7 @@
 
   // @ is an alias to /src
   import OrbScape from '@/components/OrbScape.vue'
-  import Stats from '@/components/Stats.vue'
+  import Sales from '@/components/Sales.vue'
   import LoginComponent from '@/components/LoginComponent.vue'
   import Events from '@/components/Events.vue'
   import Documentation from '@/components/Documentation.vue'
@@ -272,7 +282,7 @@
       Documentation,
       NewEvent,
       Summary,
-      Stats,
+      Sales,
       Events
     },
     methods: {

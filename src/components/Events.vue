@@ -4,7 +4,7 @@
     <h1>Events</h1>
     <hr>
     <div class="event" v-for="(event, index) in getEvents">
-      <div class="delete-container" v-on:click="deleteEvent(index)">
+      <div v-show="false" class="delete-container" v-on:click="deleteEvent(index)">
         <i class="fa fa-trash-o"></i>
       </div>
       <div class="thumbnail-container">
@@ -32,7 +32,7 @@
         </table>
       </div>
       <div>
-        <h3>Tickets</h3>
+        <h3>Tickets Available</h3>
         <table>
           <tr class="ticket" v-for="(ticket, index) in event.tickets">
             <td>{{ ticket.name }}</td>

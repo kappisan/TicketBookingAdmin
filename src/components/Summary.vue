@@ -4,9 +4,22 @@
     <h1>Dashboard</h1>
     <hr>
 
-    <h2>Events</h2>
 
-    <p v-for="(event, index) in getEvents">{{ index }}  {{ event.location }}</p>
+
+    <h2>Sales</h2>
+
+    <table>
+      <tr>
+        <th>GBP</th>
+        <th><i class="fa fa-gbp"></i></th>
+        <th>{{ totalInSales }}</th>
+      </tr>
+      <tr>
+        <th>BTC</th>
+        <th><i class="fa fa-btc"></i></th>
+        <th>{{ getBTCIn }}</th>
+      </tr>
+    </table>
 
     <hr>
 
@@ -44,6 +57,7 @@
         'getBTCIn',
         'getBTCAddress',
         'getUsername',
+        'totalInSales',
         'getEvents'
       ]),
       //Other computed properties
