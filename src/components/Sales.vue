@@ -68,12 +68,11 @@
     },
     data: () => ({
       username: '',
-      password: '',
-      salesData: []
+      password: ''
     }),
     mounted() {
         console.log("this.fetchSalesData", this.fetchSalesData);
-        this.salesData = _.orderBy(this.fetchSalesData, 'date').reverse();
+        // this.salesData = _.orderBy(this.fetchSalesData, 'date').reverse();
     },
     computed : {
     ...mapGetters([
@@ -82,6 +81,7 @@
         'getBTCIn',
         'getBTCAddress',
         'fetchSalesData',
+        'salesData',
         'totalInSales'
       ])
     },

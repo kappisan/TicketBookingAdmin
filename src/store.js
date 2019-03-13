@@ -71,6 +71,7 @@ export default new Vuex.Store({
       }
     },
     totalInSales: state => {
+      if (!state.sales || state.sales.length < 1) return 0;
       return state.sales.reduce((accumulator, sale) => {
         return accumulator + parseFloat(sale.amount);
       }, 0)
