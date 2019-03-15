@@ -71,8 +71,7 @@
       password: ''
     }),
     mounted() {
-        console.log("this.fetchSalesData", this.fetchSalesData);
-        // this.salesData = _.orderBy(this.fetchSalesData, 'date').reverse();
+        console.log("sales mounted this.fetchSalesData", this.fetchSalesData);
     },
     computed : {
     ...mapGetters([

@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 import * as $ from 'jquery'
+import * as _ from 'lodash'
 
 import createPersistedState from 'vuex-persistedstate'
 
@@ -31,7 +32,16 @@ export default new Vuex.Store({
     },
     createEvent (state, event) {
       console.log('create event mutation', event)
-      state.events.push(event)
+      // 
+        axios
+          .post('https://m25hqax3sj.execute-api.us-east-1.amazonaws.com/default/newevent', event)
+          .then(response => {
+            console.log("create event response", response);
+            if (response && response.data) {
+              console.log("got back a successful response data", response.data);
+              state.events.push(event)
+            }
+          })
     },
     fetchWalletData (state) {
       axios
@@ -58,7 +68,14 @@ export default new Vuex.Store({
           .get('https://m25hqax3sj.execute-api.us-east-1.amazonaws.com/default/events')
           .then(response => {
             if (response && response.data) {
-              const rows = response.data.Items;
+              let rows = response.data.Items;
+              rows.forEach((r) => {
+                if (typeof r.tickets == "string") {
+                  try {
+                    r.tickets = JSON.parse(r.tickets)
+                  } catch(e) {}
+                }
+              })
               console.log("axios has provided events", rows)
               state.events = rows
             }
@@ -76,6 +93,7 @@ export default new Vuex.Store({
         return accumulator + parseFloat(sale.amount);
       }, 0)
     },
+    salesData: state => _.orderBy(state.sales, 'date').reverse(),
     fetchSalesData: state => {
       console.log("fetch sales data precheck", state.sales);
       if (!state.username) return [];

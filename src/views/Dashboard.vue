@@ -291,8 +291,11 @@
       ])
     },
     computed: {
-    ...mapGetters(['getUsername', 'getEvents']),
-      //Other computed properties
+      ...mapGetters([
+        'getUsername',
+        'getEvents',
+        'fetchSalesData'
+      ])
     },
     mounted() {
       console.log("dashboard mounted", this.getUsername);
@@ -303,6 +306,8 @@
       } else {
         console.log("load into this page", this.$route.hash);
         if (this.$route.hash) this.tab = this.$route.hash;
+        
+        console.log("dashboard mounted this.fetchSalesData", this.fetchSalesData);
         
         this.$store.commit('fetchWalletData');
       }

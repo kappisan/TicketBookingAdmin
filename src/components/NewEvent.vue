@@ -11,6 +11,12 @@
                     <h2>Details</h2>
                     <table class="event-form-table">
                         <tr>
+                            <td>Unique ID</td>
+                            <td>
+                                <input v-model="event_id" type="text" class="form-control" id="event_id" name="event_id" placeholder="Event ID" tabindex="1" required>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>Venue</td>
                             <td>
                                 <input v-model="venue" type="text" class="form-control" id="name" name="name" placeholder="Venue" tabindex="1" required>
@@ -43,7 +49,7 @@
                         <tr>
                             <td>Description</td>
                             <td>
-                                <textarea v-model="description" rows="5" cols="50" name="message" class="form-control" id="message" placeholder="Description..." tabindex="6" required></textarea>
+                                <textarea v-model="desc" rows="5" cols="50" name="message" class="form-control" id="message" placeholder="Description..." tabindex="6" required></textarea>
                             </td>
                         </tr>
                     </table>
@@ -85,12 +91,13 @@
   export default {
     name: 'NewEvent',
     data: () => ({
+      event_id: '',
       venue: '',
       city: '',
       date: '',
       time: '',
       image: '',
-      description: '',
+      desc: '',
       tickets: []
     }),
     mounted() {
@@ -123,14 +130,15 @@
             })
         },
         createEvent() {
-            console.log("create event function triggered", this.venue, this.city, this.date, this.time, this.image, this.description); 
+            console.log("create event function triggered", this.venue, this.city, this.date, this.time, this.image, this.desc); 
             this.$store.commit('createEvent', {
+                event_id: this.event_id,
                 venue: this.venue,
                 city: this.city,
                 date: this.date,
                 time: this.time,
                 image: this.image,
-                description: this.description,
+                desc: this.desc,
                 tickets: this.tickets
             });
         }
